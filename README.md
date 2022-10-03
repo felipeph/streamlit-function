@@ -21,6 +21,8 @@ Final project for Harvard CS50x: Create a WebApp to analyze functions.
         - Deploy the first app
     - Input from the user
         - Test the options for input of text
-        - Test the rendering of LaTeX into the page
-        
+        - Working with sessions to keep info when re-run
+    - LaTeX render
+        - Render LaTeX with st.latex() from the input
+        - Configure sympy 
 
