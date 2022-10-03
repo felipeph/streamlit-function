@@ -1,5 +1,5 @@
 # streamlit-function
-Final project for Harvard CS50x: Create a WebApp to analyse functions.
+Final project for Harvard CS50x: Create a WebApp to analyze functions.
 
 - WebApp working
     - Set up my VS Code with Python
@@ -13,4 +13,5 @@ Final project for Harvard CS50x: Create a WebApp to analyse functions.
         - Cloned the repository to my machine
         - Configured the git with my github account.
         - Opened the README.md and started writing about my project
-    - 
+    - Setup Streamlit
+
