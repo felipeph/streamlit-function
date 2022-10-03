@@ -14,4 +14,6 @@ Final project for Harvard CS50x: Create a WebApp to analyze functions.
         - Configured the git with my github account.
         - Opened the README.md and started writing about my project
     - Setup Streamlit
+        - Install streamlit
+        - Run the get started 
 
