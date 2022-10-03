@@ -19,5 +19,13 @@ Final project for Harvard CS50x: Create a WebApp to analyze functions.
         - Create the first app.py
         - Create account at streamlit cloud
         - Deploy the first app
-    - 
+    - Input from the user
+        - Test the options for input of text
+        - Working with sessions to keep info when re-run
+    - LaTeX render
+        - Render LaTeX with st.latex() from the input
+        - Configure sympy 
+        - Configure the parser
+        - Derivatives OK
+        - Integrals OK
 
