@@ -37,6 +37,8 @@ my_input = st.text_input(txt_input, st.session_state["my_input"])
 # Record the state of a button of submit
 submit = st.button("Submit")
 
+st.write(txt_output, my_input)
+
 # If the button is clicked 
 if submit:
 
