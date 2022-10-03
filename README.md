@@ -16,4 +16,8 @@ Final project for Harvard CS50x: Create a WebApp to analyze functions.
     - Setup Streamlit
         - Install streamlit
         - Run the get started 
+        - Create the first app.py
+        - Create account at streamlit cloud
+        - Deploy the first app
+    - 
 
