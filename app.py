@@ -1,5 +1,9 @@
 # Import the streamlit library to the app as st
 import streamlit as st
+from sympy.parsing.sympy_parser import parse_expr
+from sympy.abc import *
+from sympy import *
+# x, y, z = symbols("x y z")
 
 # Set the configuration of the page with TITLE and ICON
 st.set_page_config(
@@ -9,8 +13,8 @@ st.set_page_config(
 
 # -------------- The texts of the app goes here ----------------
 
-# Text that I'm going to use to ask the input to the user
-txt_input = "Write something here and click the submit button"
+# Write down the function you want to analyze and press ENTER
+txt_input = "Write the function you want to analyze. You can use x, y and z as variables."
 
 # Text for the output legend
 txt_output = "You wrote: "
@@ -20,42 +24,42 @@ txt_submit_button = "Submit"
 
 # -------------- End of the text of the app --------------------
 
-
 # Write the title of the page
 st.title("Functions")
 
-# Check if there is no session state in this app yet
-session_new = "my_input" not in st.session_state
-
-# Clear the value of the input if the session is new
-if session_new:
-    st.session_state["my_input"] = ""
-
 # Get the input of the user and save into the session state
-my_input = st.text_input(txt_input, st.session_state["my_input"])
+function_input = st.text_input(txt_input, key="function_input")
 
-# Record the state of a button of submit
-submit = st.button("Submit")
+# Show the raw input
+"The raw input:"
+st.text(function_input)
 
-st.write(txt_output, my_input)
+if not function_input:
+    st.stop()
 
-# If the button is clicked 
-if submit:
+# Parse the string of the raw input
+function_parsed = parse_expr(function_input, transformations='all')
 
-    # Record the input of the user into a session file
-    st.session_state["my_input"] = my_input
+# Show the function parsed
+"The parsed input:"
+function_parsed
 
-    # Write back to the user
-    st.write(txt_output, my_input)
+"Derivative of the function with respect to x"
+derivative = diff(function_parsed, x)
+derivative
+
+"Integral of the function with respect to x"
+integral = integrate(function_parsed, x)
+integral
 
 
-with st.form("input_form"):
-#    st.write(txt_input)
+# Show the render 
+"LaTeX render:"
+st.latex(function_parsed)
 
-    my_input = st.text_input(txt_input, st.session_state["my_input"])
+"LaTeX expression for this function"
+function_latex = latex(function_parsed)
+function_latex
 
-    # Every form must have a submit button.
-    submitted = st.form_submit_button(txt_submit_button)
-
-    if submitted:
-        st.write(txt_output, my_input)
+"Data saved"
+st.session_state
