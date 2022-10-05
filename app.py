@@ -1,6 +1,7 @@
 # Import the streamlit library to the app as st
 import streamlit as st
 from sympy.parsing.sympy_parser import parse_expr
+from sympy.plotting import plot
 from sympy.abc import *
 from sympy import *
 # x, y, z = symbols("x y z")
@@ -10,6 +11,7 @@ st.set_page_config(
     page_title="Functions",
     page_icon="👨‍🏫",
 )
+
 
 # -------------- The texts of the app goes here ----------------
 
@@ -57,9 +59,13 @@ integral
 "LaTeX render:"
 st.latex(function_parsed)
 
+
+
 "LaTeX expression for this function"
 function_latex = latex(function_parsed)
 function_latex
+
+
 
 "Data saved"
 st.session_state
