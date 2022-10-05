@@ -28,4 +28,8 @@ Final project for Harvard CS50x: Create a WebApp to analyze functions.
         - Configure the parser
         - Derivatives OK
         - Integrals OK
+    - Plotting functions
+        - Implement sympy.plot
+            - It was not great. 
+        - Implement matplotlib from scratch
 
