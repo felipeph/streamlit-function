@@ -4,13 +4,21 @@ from sympy.parsing.sympy_parser import parse_expr
 from sympy.plotting import plot
 from sympy.abc import *
 from sympy import *
-# x, y, z = symbols("x y z")
+import matplotlib as mpl
+
+# ------------- CONFIGURATIONS -----------------
+
+# Set matplotlib parameters to default
+mpl.rcParams.update(mpl.rcParamsDefault)
 
 # Set the configuration of the page with TITLE and ICON
 st.set_page_config(
     page_title="Functions",
     page_icon="👨‍🏫",
 )
+
+# ------------------------------------------------
+
 
 # ----------- TEXT PARAMETERS -----------------
 # Write down the function you want to analyze and press ENTER
@@ -21,7 +29,7 @@ txt_input = "Write the function you want to analyze. You can use x, y and z as v
 st.title("Functions")
 
 # Get the input of the user and save into the session state
-function_input = st.text_input(txt_input, key="function_input")
+function_input = st.text_input(txt_input, "x^2 + 3x + exp(x)", key="function_input")
 
 if not function_input:
     st.stop()
@@ -40,20 +48,32 @@ derivative = diff(function_parsed, x)
 # Integral of the function with respect to x
 integral = integrate(function_parsed, x)
 
+function_plot_instructions = plot(function_parsed, show = False)
+function_plot = function_plot_instructions.show()
+
+
 # -----------------------------------------------------------
 
 # Show the function parsed
-"The parsed input:"
-function_parsed
+st.write("The parsed input:")
+st.latex(function_latex)
 
-"Derivative of the function with respect to x"
-derivative
+# Show the derivative
+st.write("Derivative of the function with respect to x")
+st.latex(derivative)
 
-"Integral of the function with respect to x"
-integral
+# Show the integral
+st.write("Integral of the function with respect to x")
+st.write(integral)
 
-"LaTeX expression for this function"
-function_latex
+# Show the latex code
+st.write("LaTeX expression for this function")
+st.write(function_latex)
 
+st.write(function_plot_instructions)
+
+st.pyplot(function_plot)
+
+# Show the data saved
 "Data saved"
 st.session_state
