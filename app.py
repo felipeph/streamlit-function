@@ -89,7 +89,7 @@ with tab_derivative:
 
 # Show the integral
 with tab_integral:
-    st.latex(r'''\int \left(''' + function_latex + r'''\right) = ''' + integral_latex + r'''+C''')
+    st.latex(r'''\int \left(''' + function_latex + r'''\right)dx = ''' + integral_latex + r'''+C''')
 
 # Plot the function
 with tab_plot:
