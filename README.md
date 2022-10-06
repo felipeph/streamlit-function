@@ -31,5 +31,11 @@ Final project for Harvard CS50x: Create a WebApp to analyze functions.
     - Plotting functions
         - Implement sympy.plot
             - It was not great. 
-        - Implement matplotlib from scratch
+        - Tried a lot of ways to make it better, but I gave up for now
+    - Make it better to mobile
+        - Tried to create a help keyboard but was difficult
+        - Ended using a for to write the function input
+        - Explored the expanders and tabs for better usability
+        - Ended up using the tabs. 
+
 
