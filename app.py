@@ -112,7 +112,9 @@ with tab_function:
 
 # Show the derivative
 with tab_derivative:
-    st.latex(r'''\frac{d}{dx} \left(''' + function_latex + r'''\right) = ''' + derivative_latex)
+    st.latex(r'''\frac{d}{dx} \left(''' + function_latex + r'''\right) = ''')
+    st.latex(derivative_latex)
+
 
 # Show the integral
 with tab_integral:
