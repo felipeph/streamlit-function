@@ -32,27 +32,40 @@ st.set_page_config(
     page_title="Functions",
     page_icon="👨‍🏫",
 )
-st.set_option('deprecation.showPyplotGlobalUse', False)
 
 # ----------- TEXT PARAMETERS -----------------
 # Write down the function you want to analyze and press ENTER
 txt_input = "Write the function you want to analyze. You can use x, y and z as variables."
-# ----------------------------------------------
 
-# Write the title of the page
-# st.title("Functions")
+example_function = "x^2 + exp(x)"
 
+# ----------- INITIALIZE SESSION STATES --------------
+
+if 'x_lim_inf' not in st.session_state:
+    st.session_state['x_lim_inf'] = -10.0
+
+if 'x_lim_sup' not in st.session_state:
+    st.session_state['x_lim_sup'] = 10.0
+
+if 'integral_variable' not in st.session_state:
+    st.session_state['integral_variable'] = "x"
+
+if 'integral_lower_limit' not in st.session_state:
+    st.session_state['integral_lower_limit'] = "0"
+
+if 'integral_upper_limit' not in st.session_state:
+    st.session_state['integral_upper_limit'] = "1"
+
+
+
+
+# ------------- GET USER INPUT ------------------------
 with st.form("input"):
 
-    function_input = st.text_input(txt_input, "x^2 + 50", key="function_input")    
+    function_input = st.text_input(txt_input, example_function, key="function_input", label_visibility="collapsed")    
     
     submitted = st.form_submit_button("Submit")
 
-# Get the input of the user and save into the session state
-# function_input = st.text_input(txt_input, "x^2 + 3x + exp(x)", key="function_input")
-
-#if not function_input:
-#    st.stop()
 
 
 # ------------- OPERATIONS WITH THE INPUT -------------------
@@ -65,22 +78,31 @@ derivative = sp.diff(function_parsed, x)
 derivative_latex = sp.latex(derivative)
 
 # Integral of the function with respect to x and convert to latex
-integral = sp.integrate(function_parsed, x)
-integral_latex = sp.latex(integral)
+integral_variable = parse_expr(st.session_state['integral_variable'], transformations='all')
+function_integrated = sp.integrate(function_parsed, integral_variable)
+integral_expression = sp.latex(sp.Integral(function_parsed, integral_variable))
+integral_latex = sp.latex(function_integrated)
 
-if 'x_lim_inf' not in st.session_state:
-    st.session_state['x_lim_inf'] = -10.0
+integral_lower_limit_parsed = parse_expr(st.session_state['integral_lower_limit'], transformations='all')
+integral_upper_limit_parsed = parse_expr(st.session_state['integral_upper_limit'], transformations='all')
+integral_with_limits_expression = sp.latex(sp.Integral(function_parsed, (integral_variable, integral_lower_limit_parsed, integral_upper_limit_parsed)))
+integral_with_limits_value = sp.integrate(function_parsed, (integral_variable, integral_lower_limit_parsed, integral_upper_limit_parsed))
 
-if 'x_lim_sup' not in st.session_state:
-    st.session_state['x_lim_sup'] = 10.0
-
+# Get the values of the session state
 plot_min_x = st.session_state["x_lim_inf"]
 plot_max_x = st.session_state["x_lim_sup"]
+
+# Create a list of numbers from the limits of the plot
 x_values = np.linspace(plot_min_x, plot_max_x, 640)
+
+# Create a numeric function from the symbolic function parsed
 function_numpy = sp.lambdify(x, function_parsed, "numpy")
+
+# Create a list of the y_values for this function
 y_values = function_numpy(x_values)
 
-# -----------------------------------------------------------
+
+# ------------ SHOW RESULTS INTO TABS --------------------
 
 tab_function, tab_derivative, tab_integral, tab_plot = st.tabs(["Function", "Derivative", "Integral", "Plot"])
 
@@ -94,8 +116,25 @@ with tab_derivative:
 
 # Show the integral
 with tab_integral:
-    st.latex(r'''\int \left(''' + function_latex + r'''\right)dx = ''' + integral_latex)
+    st.latex(integral_expression + r'''=''')
+    st.latex(integral_latex)
 
+    with st.form("integral_parameters"):
+        col1, col2, col3, col4 = st.columns(4)
+
+        with col1: 
+            integral_variable = st.text_input("Variable", key="integral_variable")
+        with col2:
+            integral_lower_limit = st.text_input("Integral Lower Limit", key="integral_lower_limit")
+        with col3:
+            integral_upper_limit = st.text_input("Integral Upper Limit", key="integral_upper_limit")
+        with col4:
+            st.write("")
+            st.write("")
+            integral_parameters_submitted = st.form_submit_button("Submit")
+    st.latex(integral_with_limits_expression + r'''=''')
+    st.latex(integral_with_limits_value)
+    
 # Plot the function
 with tab_plot:
     fig, ax = plt.subplots()
@@ -105,19 +144,19 @@ with tab_plot:
     st.latex(r'''f(x)=''' + function_latex)
     st.pyplot(fig)
 
+    # Change the values of the plot range
     with st.form("plot_range"):
-
-        col1, col2, col3 = st.columns(3)
+        st.write("Set the minimum and maximum values of the plot")
+        col1, col2, col3 = st.columns([3,3,1], gap="small")
 
         with col1:
-            x_lim_inf = st.number_input("x inferior limit", value=-10.0, key="x_lim_inf", label_visibility="collapsed")
+            x_lim_inf = st.number_input("x inferior limit", key="x_lim_inf", label_visibility="collapsed")
         
         with col2:
-            x_lim_sup = st.number_input("x superior limit", value=10.0, key="x_lim_sup", label_visibility="collapsed")
+            x_lim_sup = st.number_input("x superior limit", key="x_lim_sup", label_visibility="collapsed")
         
         with col3:
             x_limits_submitted = st.form_submit_button("Submit")
-
 
 
 

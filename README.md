@@ -41,5 +41,6 @@ Final project for Harvard CS50x: Create a WebApp to analyze functions.
         - Now I understood the function lambdfy to parse from sympy to numpy
         - Used linespace to create the x_values and lambdfy to create the y values
         - Implemented the change of values of x in the plot
-        - 
-
+    - Integration
+        - Implemented the defined integral using a lot of parsing
+        
