@@ -120,6 +120,11 @@ with tab_integral:
     st.latex(integral_latex)
 
     with st.form("integral_parameters"):
+
+        st.write("Definite Integral")
+        st.latex(integral_with_limits_expression + r'''=''')
+        st.latex(integral_with_limits_value)
+
         col1, col2, col3, col4 = st.columns(4)
 
         with col1: 
@@ -132,8 +137,6 @@ with tab_integral:
             st.write("")
             st.write("")
             integral_parameters_submitted = st.form_submit_button("Submit")
-    st.latex(integral_with_limits_expression + r'''=''')
-    st.latex(integral_with_limits_value)
     
 # Plot the function
 with tab_plot:
