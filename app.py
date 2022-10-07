@@ -1,4 +1,5 @@
 # Framework that creates the app
+from turtle import onclick
 import streamlit as st
 
 # Parser that correct the users writing
@@ -37,9 +38,11 @@ st.set_page_config(
 # Write down the function you want to analyze and press ENTER
 txt_input = "Write the function you want to analyze. You can use x, y and z as variables."
 
-example_function = "x^2 + exp(x)"
 
 # ----------- INITIALIZE SESSION STATES --------------
+
+if 'function_input' not in st.session_state:
+    st.session_state['function_input'] = "x^2 + exp(x)"
 
 if 'x_lim_inf' not in st.session_state:
     st.session_state['x_lim_inf'] = -10.0
@@ -61,11 +64,10 @@ if 'integral_upper_limit' not in st.session_state:
 
 # ------------- GET USER INPUT ------------------------
 with st.form("input"):
-
-    function_input = st.text_input(txt_input, example_function, key="function_input", label_visibility="collapsed")    
-    
+    function_input = st.text_input(txt_input, key="function_input", label_visibility="collapsed")    
     submitted = st.form_submit_button("Submit")
 
+#function_input = st.text_input(txt_input, key="function_input", label_visibility="collapsed")    
 
 
 # ------------- OPERATIONS WITH THE INPUT -------------------
@@ -102,6 +104,12 @@ function_numpy = sp.lambdify(x, function_parsed, "numpy")
 y_values = function_numpy(x_values)
 
 
+def derivative_to_input():
+    st.session_state['function_input'] = str(derivative)
+
+def integral_to_input():
+    st.session_state['function_input'] = str(function_integrated)
+
 # ------------ SHOW RESULTS INTO TABS --------------------
 
 tab_function, tab_derivative, tab_integral, tab_plot = st.tabs(["Function", "Derivative", "Integral", "Plot"])
@@ -110,10 +118,22 @@ tab_function, tab_derivative, tab_integral, tab_plot = st.tabs(["Function", "Der
 with tab_function:
     st.latex(r'''f(x)=''' + function_latex)
 
+
+
 # Show the derivative
 with tab_derivative:
     st.latex(r'''\frac{d}{dx} \left(''' + function_latex + r'''\right) = ''')
     st.latex(derivative_latex)
+
+#    derivative_as_input = st.button("Use the derivative as input")
+
+ #   if derivative_as_input:
+ #       st.session_state['function_input'] = "exp(x)"
+ #   st.write(st.session_state['function_input'])
+
+    st.button("Use the derivative as input", key="derivative_into_input_button", on_click=derivative_to_input)
+#    with st.form("derivative_as_input", on_click=derivative_to_input):
+#        button_derivative_into_input = st.form_submit_button("Use the derivative as input.")
 
 
 # Show the integral
@@ -121,6 +141,7 @@ with tab_integral:
     st.latex(integral_expression + r'''=''')
     st.latex(integral_latex)
 
+    st.button("Use the integral as input", key="integral_into_input_button", on_click=integral_to_input)
     with st.form("integral_parameters"):
 
         st.write("Definite Integral")
