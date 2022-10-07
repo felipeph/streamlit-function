@@ -68,7 +68,15 @@ derivative_latex = sp.latex(derivative)
 integral = sp.integrate(function_parsed, x)
 integral_latex = sp.latex(integral)
 
-x_values = np.linspace(-10, 10, 640)
+if 'x_lim_inf' not in st.session_state:
+    st.session_state['x_lim_inf'] = -10.0
+
+if 'x_lim_sup' not in st.session_state:
+    st.session_state['x_lim_sup'] = 10.0
+
+plot_min_x = st.session_state["x_lim_inf"]
+plot_max_x = st.session_state["x_lim_sup"]
+x_values = np.linspace(plot_min_x, plot_max_x, 640)
 function_numpy = sp.lambdify(x, function_parsed, "numpy")
 y_values = function_numpy(x_values)
 
@@ -96,6 +104,21 @@ with tab_plot:
     ax.grid()
     st.latex(r'''f(x)=''' + function_latex)
     st.pyplot(fig)
+
+    with st.form("plot_range"):
+
+        col1, col2, col3 = st.columns(3)
+
+        with col1:
+            x_lim_inf = st.number_input("x inferior limit", value=-10.0, key="x_lim_inf", label_visibility="collapsed")
+        
+        with col2:
+            x_lim_sup = st.number_input("x superior limit", value=10.0, key="x_lim_sup", label_visibility="collapsed")
+        
+        with col3:
+            x_limits_submitted = st.form_submit_button("Submit")
+
+
 
 
 # Show the data saved
