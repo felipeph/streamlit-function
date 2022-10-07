@@ -1,5 +1,4 @@
 # Framework that creates the app
-from turtle import onclick
 import streamlit as st
 
 # Parser that correct the users writing
