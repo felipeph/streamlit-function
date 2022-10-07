@@ -186,5 +186,5 @@ with tab_plot:
 
 
 # Show the data saved
-"Data saved"
-st.session_state
+#"Data saved"
+#st.session_state
