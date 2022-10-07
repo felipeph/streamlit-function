@@ -15,25 +15,24 @@ import sympy as sp
 
 # Plot the functions
 import matplotlib as mpl
+import matplotlib.pyplot as plt
+
+# Numerical calculations for the plot
+import numpy as np
 
 # ------------- CONFIGURATIONS -----------------
 
 # Set matplotlib parameters to default
 mpl.rcParams.update(mpl.rcParamsDefault)
-# plt.rcParams['figure.figsize'] = [8.0, 8.0]
-# plt.rcParams['figure.dpi'] = 120
+mpl.rcParams.update({"font.family": "serif"})
+
 
 # Set the configuration of the page with TITLE and ICON
 st.set_page_config(
     page_title="Functions",
     page_icon="👨‍🏫",
 )
-
 st.set_option('deprecation.showPyplotGlobalUse', False)
-
-
-# ------------------------------------------------
-
 
 # ----------- TEXT PARAMETERS -----------------
 # Write down the function you want to analyze and press ENTER
@@ -41,19 +40,13 @@ txt_input = "Write the function you want to analyze. You can use x, y and z as v
 # ----------------------------------------------
 
 # Write the title of the page
-st.title("Functions")
-
+# st.title("Functions")
 
 with st.form("input"):
-    input_area, submit_button_area = st.columns([10,1], gap="small")
+
+    function_input = st.text_input(txt_input, "x^2 + 50", key="function_input")    
     
-    with input_area:
-        function_input = st.text_input(txt_input, "x^2 + 50", key="function_input")    
-    
-    with submit_button_area:
-        st.write(" ")
-        st.write(" ")
-        submitted = st.form_submit_button("✔")
+    submitted = st.form_submit_button("Submit")
 
 # Get the input of the user and save into the session state
 # function_input = st.text_input(txt_input, "x^2 + 3x + exp(x)", key="function_input")
@@ -75,6 +68,10 @@ derivative_latex = sp.latex(derivative)
 integral = sp.integrate(function_parsed, x)
 integral_latex = sp.latex(integral)
 
+x_values = np.linspace(-10, 10, 640)
+function_numpy = sp.lambdify(x, function_parsed, "numpy")
+y_values = function_numpy(x_values)
+
 # -----------------------------------------------------------
 
 tab_function, tab_derivative, tab_integral, tab_plot = st.tabs(["Function", "Derivative", "Integral", "Plot"])
@@ -89,17 +86,16 @@ with tab_derivative:
 
 # Show the integral
 with tab_integral:
-    st.latex(r'''\int \left(''' + function_latex + r'''\right)dx = ''' + integral_latex + r'''+C''')
+    st.latex(r'''\int \left(''' + function_latex + r'''\right)dx = ''' + integral_latex)
 
 # Plot the function
 with tab_plot:
-    function_plot = plot(function_parsed, title="$f(x) = " + function_latex + "$", xlabel="", ylabel="", axis_center=(0,0), adaptive=False, nb_of_points=1000)
-    st.pyplot(function_plot.show())
-    
-
-# Show the latex code
-#st.write("LaTeX expression for this function")
-#st.write(function_latex)
+    fig, ax = plt.subplots()
+    ax.plot(x_values, y_values)
+    ax.set(xlabel='$x$', ylabel='$f(x)$')
+    ax.grid()
+    st.latex(r'''f(x)=''' + function_latex)
+    st.pyplot(fig)
 
 
 # Show the data saved

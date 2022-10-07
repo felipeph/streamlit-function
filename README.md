@@ -37,5 +37,9 @@ Final project for Harvard CS50x: Create a WebApp to analyze functions.
         - Ended using a for to write the function input
         - Explored the expanders and tabs for better usability
         - Ended up using the tabs. 
-
+    - Back to plotting
+        - Now I understood the function lambdfy to parse from sympy to numpy
+        - Used linespace to create the x_values and lambdfy to create the y values
+        - 
+        - 
 
