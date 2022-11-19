@@ -59,10 +59,11 @@ if 'integral_upper_limit' not in st.session_state:
     st.session_state['integral_upper_limit'] = "1"
 
 
-
+st.title("Calculus Calculator")
 
 # ------------- GET USER INPUT ------------------------
 with st.form("input"):
+    st.write(txt_input)
     function_input = st.text_input(txt_input, key="function_input", label_visibility="collapsed")    
     submitted = st.form_submit_button("Submit")
 
