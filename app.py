@@ -66,8 +66,6 @@ with st.form("input"):
     function_input = st.text_input(txt_input, key="function_input", label_visibility="collapsed")    
     submitted = st.form_submit_button("Submit")
 
-#function_input = st.text_input(txt_input, key="function_input", label_visibility="collapsed")    
-
 
 # ------------- OPERATIONS WITH THE INPUT -------------------
 # Parse the string of the raw input and convert to latex
@@ -124,15 +122,7 @@ with tab_derivative:
     st.latex(r'''\frac{d}{dx} \left(''' + function_latex + r'''\right) = ''')
     st.latex(derivative_latex)
 
-#    derivative_as_input = st.button("Use the derivative as input")
-
- #   if derivative_as_input:
- #       st.session_state['function_input'] = "exp(x)"
- #   st.write(st.session_state['function_input'])
-
     st.button("Use the derivative as input", key="derivative_into_input_button", on_click=derivative_to_input)
-#    with st.form("derivative_as_input", on_click=derivative_to_input):
-#        button_derivative_into_input = st.form_submit_button("Use the derivative as input.")
 
 
 # Show the integral
@@ -182,9 +172,3 @@ with tab_plot:
         
         with col3:
             x_limits_submitted = st.form_submit_button("Submit")
-
-
-
-# Show the data saved
-#"Data saved"
-#st.session_state
