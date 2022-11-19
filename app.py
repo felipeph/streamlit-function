@@ -175,4 +175,4 @@ with tab_plot:
             x_limits_submitted = st.form_submit_button("Submit")
 
 st.write("")
-st.write("Developed by Felipe Pereira Heitmann - felipeph@gmail.com")
+st.caption("Developed by Felipe Pereira Heitmann - felipeph@gmail.com")
