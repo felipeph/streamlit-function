@@ -176,3 +176,4 @@ with tab_plot:
 
 st.write("")
 st.caption("Developed by Felipe Pereira Heitmann - felipeph@gmail.com")
+st.caption("Source: https://github.com/felipeph/streamlit-function")
