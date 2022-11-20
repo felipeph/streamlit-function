@@ -124,7 +124,7 @@ Functions used to plot with matplotlib:
 - Integral
     - Show the antiderivative of the function
     - Download the LaTeX and the rendering. (NOT DONE)
-    - Calcule the defined integral with the upper and lower limits.
+    - Calculate the defined integral with the upper and lower limits.
 
 # Script for the video that presents the app
 Hi, I’m Felipe Heitmann from Belo Horizonte, Brazil and this is CS50.
