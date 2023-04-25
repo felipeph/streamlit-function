@@ -3,7 +3,7 @@
 #### Description:
 
 # CS 50 - Final Project
-I'm a Calculus teacher at Anhanguera College in Belo Horizonte, Minas Gerais, Brazil. Since my undergraduate in Mathematics, I researched Technology, Mathematics, and Education, experimenting with much software such as Wolfram Mathematica, Matlab, Octave, Geogebra, WolframAlpha, PhotoMath, and so on.
+I'm a Calculus teacher at Anhanguera College in Belo Horizonte, Minas Gerais, Brazil. Since my undergraduate in Mathematics, I researched Technology, Mathematics, and Education, experimenting with many software such as Wolfram Mathematica, Matlab, Octave, Geogebra, WolframAlpha, PhotoMath, and so on.
 
 When I got my master's degree in Mathematics Education and Technology in 2013 I was researching how students could solve mathematical problems in a group inside a distance learning environment.
 
@@ -13,14 +13,14 @@ When I started the CS50 course I was already interested in Python programming an
 
 I found out that the SymPy library had a power of symbolic computation that was similar to other CAS I has experience with, like Wolfram Mathematica for example, so I wanted to try it.
 
-When I started the project my goal was to implement a WebApp that could calculate the derivatives and integrals of a given function and plot its graph. After I lot of learning about the multiple python libraries and implementing a lot of features, I think that I had fulfilled my goal.
+When I started the project my goal was to implement a WebApp that could calculate the derivatives and integrals of a given function and plot its graph. After I lot of learning about the multiple Python libraries and implementing a lot of features, I think that I had fulfilled my goal.
 
 ## The libraries and processes
 
 ### VS Code
 When I started the project I was working only inside the CS50 codespace and had never configured my machine to code independently of the infrastructure of the course.
 
-My first task was to configure python and its libraries inside my environment of the VS Code IDE. Took a little time and search, but I made it and started to work on my computer outside the CS50 codespace.
+My first task was to configure Python and its libraries inside my environment of the VS Code IDE. Took a little time and search, but I made it and started to work on my computer outside the CS50 codespace.
 
 ### GitHub
 I knew that the infrastructure of the CS50 codespace was built up from GitHub, but I had never mangled into what is Git or how GitHub works.
@@ -34,7 +34,7 @@ At first, I thought about using Flask + HTML + CSS + JavaScript as the week 9 pr
 
 So I tried to learn all I could about this library with the documentation and some examples of data science projects deployed into it that helped me to stick to my choice of using it.
 
-One of the best parts of using the streamlit library was that they have its own cloud and make it very easy to deploy the projects from GitHub.
+One of the best parts of using the streamlit library was that they have its cloud and make it very easy to deploy the projects from GitHub.
 
 The main feature of rendering an HTML + CSS + JavaScript web app from Python-only code was perfect for me. I used these functions:
 
@@ -79,7 +79,7 @@ Made possible to parse many ways to write a function into a syntax that sympy co
     - An incredible function that turns a symbolic function in sympy into a numeric function in the numpy library.
 
 ## NumPy
-When the project started I knew that there was a very popular python library to work with numerical computation, but I thought I wouldn't need to use it because all my computation would be symbolic. I was wrong.
+When the project started I knew that there was a very popular Python library to work with numerical computation, but I thought I wouldn't need to use it because all my computation would be symbolic. I was wrong.
 
 NumPy was needed to create the lists of values to be plotted by the matplotlib. So the only two functions that I used with NumPy were:
 - np.linspace
@@ -139,7 +139,7 @@ In this web app, you can write a function the way you like, and the app is going
 
 For example 2sin(x) + cos(2x)
 
-Or you can write if without the parenthesis and the asterisk it will understand it as well.
+Or you can write it without the parenthesis and the asterisk, it will understand it as well.
 
 If what you see is what you wanted to input you can go and check the derivative tab.
 
@@ -174,8 +174,8 @@ You can change the values of the interval presented in this plot using the form 
         - Download and Install Python 3.10
         - Install Python extension in VS Code
         - Download and Install GIT
-        - Test some programs in python
-        - Installed spell checker on vscode.
+        - Test some programs in Python
+        - Installed spell checker on vs code.
     - Setup GitHub
         - Create a new repository for the project
         - Cloned the repository to my machine
